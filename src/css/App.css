@@ -1,0 +1,17 @@
+a {
+  text-decoration: none;
+}
+
+.titleBar {
+  background-color: #000;
+  display: block;
+  color: #fff;
+  padding-left: 16px
+}
+
+.searchBar {
+  font-size: 24px;
+  display: block;
+  width: 99%;
+  padding: 8px 16px;
+}
