@@ -5,18 +5,22 @@ import Home from "./Home";
 import Trending from "./Trending";
 import PageNotFound from "./PageNotFound";
 import SignUp from "./SignUp";
+import SignIn from "./SignIn";
 
 const Router = () => (
   <BrowserRouter>
     <div>
       <TopnavBar />
-      <div className="body">
+      <div className="body min-h-screen bg-grey-darkest">
         <Switch>
           {/* Home Page Route */}
           <Route exact path="/" component={Home} />
 
           {/* Trending Media Page */}
           <Route path="/trending" component={Trending} />
+
+          {/* Signin Page */}
+          <Route path="/login" component={SignIn} />
 
           {/* Signup Page */}
           <Route path="/signup" component={SignUp} />

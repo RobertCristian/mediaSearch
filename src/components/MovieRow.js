@@ -27,7 +27,7 @@ class MovieRow extends Component {
     }
 
     return (
-      <div className="mb-5 flex flex-col items-center sm:flex-row sm:items-start sm:mb-2">
+      <div className="mb-5 flex flex-col items-center sm:flex-row sm:items-start sm:mb-2 text-white">
         <div className="w-1/6">{elementPoster}</div>
 
         <div className="w-full flex flex-col items-center p-5">
