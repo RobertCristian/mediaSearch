@@ -2,22 +2,52 @@ import React, { Component } from "react";
 import "../css/App.css";
 import MovieRow from "./MovieRow";
 import SearchBar from "./SearchBar";
-import  * as helpers from "../helpers/general";
+import * as helpers from "../helpers/general";
 import { fetchMedia } from "../lib/fetchMedia";
 
-class App extends Component {
+import { withFirebase } from "./Firebase";
+
+class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       media_type: "movie",
-      searchTerm: ""
+      searchTerm: "",
+      loading: false,
+      users: []
     };
 
     this.performSearch();
   }
 
-    performSearch = helpers.debounce(searchTerm => {
+  componentDidMount() {
+    this.setState({ loading: true });
+
+    this.props.firebase.users().on("value", snapshot => {
+      const usersObject = snapshot.val();
+
+      console.log("usersobj", usersObject);
+
+      const usersList = Object.keys(usersObject).map(key => ({
+        ...usersObject[key],
+        uid: key
+      }));
+
+      console.log("userList", usersObject);
+
+      this.setState({
+        users: usersList,
+        loading: false
+      });
+    });
+  }
+
+  componentWillUnmount() {
+    this.props.firebase.users().off();
+  }
+
+  performSearch = helpers.debounce(searchTerm => {
     const that = this;
 
     fetchMedia(searchTerm, this.state.media_type)
@@ -72,6 +102,9 @@ class App extends Component {
   };
 
   render() {
+    const { users } = this.state;
+    console.log(users);
+
     return (
       <div>
         <SearchBar searchChangeHandler={this.searchChangeHandler} />
@@ -82,4 +115,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withFirebase(Home);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import TopnavBar from "./TopbarNav";
 import Home from "./Home";
@@ -7,30 +7,36 @@ import PageNotFound from "./PageNotFound";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 
-const Router = () => (
-  <BrowserRouter>
-    <div>
-      <TopnavBar />
-      <div className="body min-h-screen bg-grey-darkest">
-        <Switch>
-          {/* Home Page Route */}
-          <Route exact path="/" component={Home} />
+import { withAuthentication } from "./Session";
 
-          {/* Trending Media Page */}
-          <Route path="/trending" component={Trending} />
+class Router extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <TopnavBar />
+          <div className="body min-h-screen bg-grey-darkest">
+            <Switch>
+              {/* Home Page Route */}
+              <Route exact path="/" component={Home} />
 
-          {/* Signin Page */}
-          <Route path="/login" component={SignIn} />
+              {/* Trending Media Page */}
+              <Route path="/trending" component={Trending} />
 
-          {/* Signup Page */}
-          <Route path="/signup" component={SignUp} />
+              {/* Signin Page */}
+              <Route path="/login" component={SignIn} />
 
-          {/* 404 Not Found Page Route */}
-          <Route component={PageNotFound} />
-        </Switch>
-      </div>
-    </div>
-  </BrowserRouter>
-);
+              {/* Signup Page */}
+              <Route path="/signup" component={SignUp} />
 
-export default Router;
+              {/* 404 Not Found Page Route */}
+              <Route component={PageNotFound} />
+            </Switch>
+          </div>
+        </div>
+      </BrowserRouter>
+    );
+  }
+}
+
+export default withAuthentication(Router);
