@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AuthUserContext } from "./Session";
+import SignOutButton from "./SignOut";
 
 const TopbarNav = () => (
   <div>
@@ -48,7 +49,7 @@ const TopbarNavBaseAuth = props => (
           to="/login"
           className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4"
         >
-          {props.authUser.email} - SignOut
+          {props.authUser.email} - <SignOutButton/>
         </Link>
         {/* <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4">
         Examples
